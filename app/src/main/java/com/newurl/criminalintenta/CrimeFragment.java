@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by a on 4/20/2016.
@@ -19,7 +20,7 @@ import android.widget.EditText;
 public class CrimeFragment extends Fragment {
     //model
     private Crime mCrime; private EditText mEditTextTitleField; private Button mDateBtn;
-    private CheckBox mSolvedChkBox;
+    private CheckBox mSolvedChkBox; private TextView mTxtTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class CrimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v= inflater.inflate( R.layout.fragment_crime, container, false );//inflate view, place in activ container
+
+        mTxtTitle=(TextView) v.findViewById(R.id.txtTitle);
 
         mDateBtn=(Button) v.findViewById(R.id.btnDate);
         mDateBtn.setText(mCrime.getDate().toString());
@@ -51,11 +54,11 @@ public class CrimeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setTitle(s.toString() );
+                mCrime.setTitle(s.toString() ); mTxtTitle.setText(s.toString());
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {}
+            @Override //maybe move above to here?
+            public void afterTextChanged(Editable s) { }
         });
 
         return v;
