@@ -15,6 +15,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import android.content.*;
 
 public class CrimeListFrag extends Fragment
 {
@@ -73,6 +74,10 @@ public class CrimeListFrag extends Fragment
         @Override
         public void onClick(View v) {
             Toast.makeText(getActivity(), mCrime.getTitle() + "clicked", Toast.LENGTH_SHORT).show();
+            //Intent i= new Intent(getActivity(), CrimeActivity.class );
+            Intent i= CrimeActivity.newIntent(getActivity(), mCrime.getId());//from arg1 to CA, w. extraUUID
+            // mdl collec accessible from both frags
+            startActivity(i);//from list to CrimeActiv
         }
 
         public void bindCrimeMdlToUI(Crime crime)
